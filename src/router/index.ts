@@ -1,20 +1,41 @@
 import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import ContactsList from "@/pages/ContactsList.vue";
+import AddContact from "@/pages/AddContact.vue";
+import EditContact from "@/pages/EditContact.vue";
+import ViewContact from "@/pages/ViewContact.vue";
+import PageNotFound from "@/pages/PageNotFound.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    name: 'home',
-    component: HomeView
+    redirect: '/contacts'
   },
   {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    path: '/contacts',
+    component: ContactsList,
+    name: 'ContactsList',
+  },
+  {
+    path: '/contacts/add',
+    name: 'AddContact',
+    component: AddContact,
+  },
+  {
+    path: '/contacts/edit/:id',
+    name: 'EditContact',
+    component: EditContact,
+  },
+  {
+    path: '/contacts/view/:id',
+    name: 'ViewContact',
+    component: ViewContact,
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: 'PageNotFound',
+    component: PageNotFound,
   }
+
 ]
 
 const router = createRouter({
