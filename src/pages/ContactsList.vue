@@ -39,6 +39,16 @@
     </div>
   </div>
 
+  <div class="row p-3">
+    <div class="offset-md-10 col-md-2">
+      <div class="alert alert-success" role="alert">
+        A simple success alert—check it out!
+      </div>
+    </div>
+  </div>
+  <div id="liveAlertPlaceholder"></div>
+  <button type="button" class="btn btn-primary" id="liveAlertBtn">Show live alert</button>c
+
 <!--  Loader -->
   <div v-if="loading">
     <Loader/>
@@ -57,10 +67,11 @@
     </div>
   </div>
 
+
   <div class="container my-3">
     <div class="row">
       <div class="col-md-6" v-for="contact in contacts" :key="contact.id">
-        <div class="card my-2 shadow-lg list-group-item-success bg-secondary" >
+        <div class="card my-2 shadow-lg list-group-item-primary bg-secondary" >
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-sm-4">
@@ -84,7 +95,7 @@
                 <router-link :to="`/contacts/edit/${contact.id}`" class="btn btn-primary my-1">
                   <i class="fas fa-pen"></i>
                 </router-link>
-                <button class="btn btn-danger my-1">
+                <button class="btn btn-danger my-1" @click="deleteContact(contact.id)">
                   <i class="fas fa-trash-alt"></i>
                 </button>
               </div>
@@ -128,7 +139,19 @@ export default {
       this.loading = false;
     }
   },
-  methods: {}
+  methods: {
+    async deleteContact(contactId: number) {
+      try {
+        let response = await contactsService.deleteContact(contactId);
+        if(response) {
+          window.location.reload();
+        }
+        console.log(response);
+      } catch(e) {
+        console.log(e);
+      }
+    }
+  }
 }
 </script>
 

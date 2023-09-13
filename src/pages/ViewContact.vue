@@ -67,8 +67,16 @@ export default {
       contactId: this.$route.params.id,
       loading: false,
       errorMessage: null,
-      contact: {},
-      group: {}
+      contact: {
+        name: '',
+        imageURL: '',
+        groupId: '',
+        email: '',
+        phoneNumber: ''
+      },
+      group: {
+        name: ''
+      }
     };
   },
   async created() {
