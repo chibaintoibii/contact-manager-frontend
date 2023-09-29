@@ -1,4 +1,5 @@
 <template>
+  <Navbar/>
   <div class="container mt-3">
     <div class="row">
       <div class="col-md-5">
@@ -39,18 +40,8 @@
     </div>
   </div>
 
-  <div class="row p-3">
-    <div class="offset-md-10 col-md-2">
-      <div class="alert alert-success" role="alert">
-        A simple success alert—check it out!
-      </div>
-    </div>
-  </div>
-  <div id="liveAlertPlaceholder"></div>
-  <button type="button" class="btn btn-primary" id="liveAlertBtn">Show live alert</button>c
-
 <!--  Loader -->
-  <div v-if="loading">
+  <div v-if="loading" class="mt-4">
     <Loader/>
   </div>
 
@@ -71,7 +62,7 @@
   <div class="container my-3">
     <div class="row">
       <div class="col-md-6" v-for="contact in contacts" :key="contact.id">
-        <div class="card my-2 shadow-lg list-group-item-primary bg-secondary" >
+        <div class="card my-2 shadow-lg list-group-item-light bg-white" >
           <div class="card-body">
             <div class="row align-items-center">
               <div class="col-sm-4">
@@ -82,10 +73,10 @@
                 >
               </div>
               <div class="col-sm-7">
-                <ul class="list-group">
-                  <li class="list-group-item">Name: <span class="fw-bold">{{ contact.name }}</span></li>
-                  <li class="list-group-item">Email: <span class="fw-bold">{{ contact.email }}</span></li>
-                  <li class="list-group-item">Phone Number: <span class="fw-bold">{{ contact.phoneNumber }}</span></li>
+                <ul class="list-group bg-primary-subtle">
+                  <li class="list-group-item bg-success-subtle text-dark">Name: <span class="fw-bold">{{ contact.name }}</span></li>
+                  <li class="list-group-item bg-success-subtle text-dark">Email: <span class="fw-bold">{{ contact.email }}</span></li>
+                  <li class="list-group-item bg-success-subtle text-dark">Phone Number: <span class="fw-bold">{{ contact.phoneNumber }}</span></li>
                 </ul>
               </div>
               <div class="col-sm-1 d-flex flex-column justify-content-center align-items-center">
@@ -112,11 +103,12 @@
 import {contactsService} from "@/services/contacts.service";
 import Loader from "@/components/Loader.vue";
 import {groupsService} from "@/services/groups.service";
+import Navbar from "@/App.vue";
 
 
 export default {
   name: 'ContactsList',
-  components: {Loader},
+  components: {Navbar, Loader},
   data: () => {
     return {
       loading: false,
@@ -125,6 +117,15 @@ export default {
       groups: [],
     }
   },
+  // async mounted() {
+  //   try {
+  //     let res = await contactsService.getAllContacts();
+  //     console.log("response", res);
+  //   } catch (e) {
+  //     console.log("error", e);
+  //   }
+  //
+  // },
   async created() {
     try {
       this.loading = true;

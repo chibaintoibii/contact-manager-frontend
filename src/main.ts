@@ -13,9 +13,10 @@ import "../node_modules/@fortawesome/fontawesome-free/css/all.css";
 
 import './styles.css'; // main css file
 
-
 const app = createApp(App);
 
 app.use(router);
+
+
 
 app.mount('#app');

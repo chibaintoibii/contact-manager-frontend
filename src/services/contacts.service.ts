@@ -1,29 +1,31 @@
 import axios from 'axios';
+
+let axiosInstance = axios.create({
+    baseURL: 'http://localhost:3000',
+    headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('token')}`,
+    }
+})
 class ContactsService {
-    private readonly API_URL = 'http://localhost:3001';
     async getAllContacts() {
-        const dataURL = `${this.API_URL}/contacts`;
-        return axios.get(dataURL);
+        return axiosInstance.get('/contacts');
     }
 
     async getOneContact(id: string) {
-        const dataURL = `${this.API_URL}/contacts/${id}`;
-        return axios.get(dataURL);
+        return axiosInstance.get(`/contacts/${id}`);
     }
 
     async createContact(contact: any) {
-        const dataURL = `${this.API_URL}/contacts`;
-        return axios.post(dataURL, contact);
+        return axiosInstance.post('/contacts', contact);
     }
 
     async updateContact(id: number, contact: any) {
-        const dataURL = `${this.API_URL}/contacts/${id}`;
-        return axios.put(dataURL, contact);
+        return axiosInstance.put(`/contacts/${id}`, contact);
     }
 
     async deleteContact(id: number) {
-        const dataURL = `${this.API_URL}/contacts/${id}`;
-        return axios.delete(dataURL);
+        return axiosInstance.delete(`/contacts/${id}`);
     }
 }
 

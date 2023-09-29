@@ -12,8 +12,8 @@ export default {
 
 <style scoped>
 .loader {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border: 5px solid #FFF;
   border-bottom-color: transparent;
   border-radius: 50%;

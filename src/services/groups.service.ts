@@ -1,35 +1,32 @@
 import axios from 'axios';
 
+let axiosInstance = axios.create({
+    baseURL: `http://localhost:3000`,
+})
+
 class GroupsService {
-    private readonly API_URL = 'http://localhost:3001';
     getAllGroups() {
-        const dataURL = `${this.API_URL}/groups`;
-        return axios.get(dataURL);
+        return axiosInstance.get('/groups');
     }
 
     getOneGroup(groupId: string) {
-        const dataURL = `${this.API_URL}/groups/${groupId}`;
-        return axios.get(dataURL);
+        return axiosInstance.get(`/groups/${groupId}`);
     }
 
     getGroupContacts(groupId: number) {
-        const dataURL = `${this.API_URL}/groups/${groupId}/contacts`;
-        return axios.get(dataURL);
+        return axiosInstance.get(`/groups/${groupId}/contacts`);
     }
 
     addGroup(group: any) {
-        const dataURL = `${this.API_URL}/groups`;
-        return axios.post(dataURL, group);
+        return axiosInstance.post(`/groups`, group);
     }
 
     updateGroup(groupId: number, group: any) {
-        const dataURL = `${this.API_URL}/groups/${groupId}`;
-        return axios.put(dataURL, group);
+        return axiosInstance.put(`/groups/${groupId}`, group);
     }
 
     deleteGroup(groupId: number) {
-        const dataURL = `${this.API_URL}/groups/${groupId}`;
-        return axios.delete(dataURL);
+        return axiosInstance.delete(`/groups/${groupId}`);
     }
 }
 

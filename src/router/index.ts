@@ -1,14 +1,16 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw } from 'vue-router'
+import {createRouter, createWebHistory, RouteRecordRaw} from 'vue-router'
 import ContactsList from "@/pages/ContactsList.vue";
 import AddContact from "@/pages/AddContact.vue";
 import EditContact from "@/pages/EditContact.vue";
 import ViewContact from "@/pages/ViewContact.vue";
 import PageNotFound from "@/pages/PageNotFound.vue";
+import Login from "@/pages/Login.vue";
+import Register from "@/pages/Register.vue";
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/contacts'
+    redirect: '/auth/login'
   },
   {
     path: '/contacts',
@@ -31,6 +33,18 @@ const routes: Array<RouteRecordRaw> = [
     component: ViewContact,
   },
   {
+    path: '/auth/login',
+    name: 'Login',
+    component: Login,
+  },
+  {
+    path: '/auth/register',
+    name: 'Register',
+    component: Register,
+  },
+
+    // last route
+  {
     path: '/:pathMatch(.*)*',
     name: 'PageNotFound',
     component: PageNotFound,
@@ -39,7 +53,7 @@ const routes: Array<RouteRecordRaw> = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes
 })
 

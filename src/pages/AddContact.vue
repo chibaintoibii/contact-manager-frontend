@@ -51,6 +51,7 @@
               <option value="" disabled>Select Group</option>
               <option v-for="group of groups" :key="group.id" :value="group.id">{{group.name}}</option>
             </select>
+<!--            <pre>{{groups}}</pre>-->
             <div class="validation-error" v-if="hasValidationError && !contact.groupId">
               Please select a group
             </div>
@@ -148,13 +149,13 @@ export default {
       try {
         let response = await contactsService.createContact(this.contact);
         if(response) {
-          return this.$router.push('/');
+          return this.$router.push('/contacts', {replace: true});
         }
         else {
-          return this.$router.push('/contacts/add');
+          return this.$router.push('/contacts/add', {replace: true});
         }
       } catch (e) {
-        console.log("error", e);
+        console.log("error in add contact", e);
       }
     }
   }
