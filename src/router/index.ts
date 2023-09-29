@@ -10,12 +10,14 @@ import Register from "@/pages/Register.vue";
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
-    redirect: '/auth/login'
+    redirect: '/contacts'
+    // component: App
   },
   {
     path: '/contacts',
     component: ContactsList,
     name: 'ContactsList',
+    meta: {requiresAuth: true}
   },
   {
     path: '/contacts/add',
@@ -56,5 +58,20 @@ const router = createRouter({
   history: createWebHistory(),
   routes
 })
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      // User is authenticated, proceed to the route
+      next();
+    } else {
+      // User is not authenticated, redirect to login
+      next('/auth/login');
+    }
+  } else {
+    // Non-protected route, allow access
+    next();
+  }
+});
 
 export default router

@@ -119,7 +119,6 @@ export default {
           email: this.email,
           password: this.password
         }
-        console.log('user from dsgsdgds');
         let response = await authService.login(user);
         console.log(response.data);
         const token = response.data.accessToken;

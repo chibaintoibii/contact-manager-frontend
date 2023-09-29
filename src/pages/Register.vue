@@ -142,6 +142,9 @@ export default {
           password: this.password
         }
         let response = await authService.register(user);
+        const token = response.data.accessToken;
+        localStorage.setItem('token', `${token}`);
+        this.$router.push('/contacts', {replace: true});
         console.log(response.data);
       } catch (e) {
 
